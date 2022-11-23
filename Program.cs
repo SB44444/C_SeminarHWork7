@@ -2,19 +2,72 @@
 m = 3, n = 4.
 0,5 7 -2 -0,2
 1 -3,3 8 -9,9
-8 7,8 -7,1 9
-double [,] RandomArray(double rows, double columns, double minValue, double maxValue)
-    double [,] array = new array[roes, colunms]; // Создание массива
-    for(int i = 0; i < rows; i++)
+8 7,8 -7,1 9*/
+double [,] RandomArray(int rows, int columns, int digit, double minValue, double maxValue)
+{   
+    double [,] array = new double [rows, columns]; // Создание массива
+    {
+    double decim = Convert.ToDouble(digit);// Преобразуем в double  
+    int dec = Convert.ToInt32(Math.Pow(10, digit));//Нужное ко-во знаков после запятой
+    minValue = Math.Round(minValue, digit); // Округляем параметр
+    minValue *= dec; // Целое число для метода Random.Next
+    int minV = Convert.ToInt32(minValue); // Преобразуем в Int   
+    maxValue = Math.Round(maxValue, digit); // Округляем параметр
+    maxValue *= dec; // Целое число для метода Random.Next
+    int maxV = Convert.ToInt32(maxValue);// Преобразуем в Int 
+        for(int i = 0; i < rows; i++)
+        {           
+            for(int j = 0; j < columns; j++) 
+             {  
+                array[i, j] = Math.Round((new Random().NextDouble() * (new Random().Next(minV, maxV))) /  dec, digit); // Округляем до заданного количества 
+             }
+        }                      // знаков после запятой в массиве случайную величину, заполняем массив
+    return array;
+    }
+}        
+void ShowArray(double[,] array)
+{       
+    Console.WriteLine("Your Array:");
+    for(int i = 0; i < array.GetLength(0); i++)
     {        
-        for(int j = 0; j < columns; j++) 
-        {  
-            array[i,j] = new Random().Next(minValue, maxValue + 1);
-        }
+        for(int j = 0; j < array.GetLength(1); j++) 
+            Console.Write(array[i, j] + "| ");
+    Console.WriteLine();
     }        
-    return array; 
+    Console.WriteLine();   
+}
+Console.WriteLine("Input number of rows:");
+int m = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Input number of colomns:");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Input the number of decimal places:");
+int d = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Input  of possible value:");
+int  min = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Input the maximum of possible value:");
+int max = Convert.ToInt32(Console.ReadLine());
+double [,] myRandomArray = RandomArray(m, n, d, min, max);
+ShowArray(myRandomArray);
 
-/*Задача 38: Задайте массив вещественных чисел.
+/*
+double [] RandomArray(int size, int digit, double minValue, double maxValue)
+{
+   double [] array = new double  [size];// Создание массива
+   double decim = Convert.ToDouble(digit);// Преобразуем в double   
+   Int32 dec = Convert.ToInt32(Math.Pow(10, decim));//Нужное ко-во знаков после запятой
+   minValue = Math.Round(minValue,size); // Округляем параметр
+   minValue *= dec; // Целое число для метода Random.Next
+   int minV = Convert.ToInt32(minValue); // Преобразуем в Int   
+   maxValue = Math.Round(maxValue,size); // Округляем параметр
+   maxValue *= dec; // Целое число для метода Random.Next
+   int maxV = Convert.ToInt32(maxValue);// Преобразуем в Int   
+   for(int i = 0; i < size; i++)      
+       
+       array[i] = Math.Round((new Random().NextDouble() * (new Random().Next(minV, maxV))) /  dec, digit); /* Округляем до заданного количества 
+       знаков после запятой в массиве случайную величину*/       
+   // return array;      
+/*
+Задача 38: Задайте массив вещественных чисел.
  Найдите разницу между максимальным и минимальным элементов массива.*/
 //minValue, maxValue+1
 /*
@@ -55,17 +108,7 @@ void MaxMinDifferanceInArray(double[] array)
     Console.WriteLine($"The difference from minimum to maximum digits in your Array: {maxCell - minCell}");       
 }
 
-Console.WriteLine("Input size of your array");
-int sizeA = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Input number of decimal place in your array");// количество знаков после запятой в массиве
-int sizeDec = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Input the minimum digit of interval in your array");
-double  min = Convert.ToDouble(Console.ReadLine());
-Console.WriteLine("Input the maximum digit of interval in your array");
-double max = Convert.ToDouble(Console.ReadLine());
-double[] myRandomArray = RandomArray(sizeA, sizeDec, min, max);
-ShowArray(myRandomArray);
-MaxMinDifferanceInArray(myRandomArray);
+
 */
 /* Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и 
 возвращает значение этого элемента или же указание, что такого элемента нет.
