@@ -3,6 +3,7 @@ m = 3, n = 4.
 0,5 7 -2 -0,2
 1 -3,3 8 -9,9
 8 7,8 -7,1 9*/
+/*
 double [,] RandomArray(int rows, int columns, int digit, double minValue, double maxValue)
 {   
     double [,] array = new double [rows, columns]; // Создание массива
@@ -48,67 +49,6 @@ Console.WriteLine("Input the maximum of possible value:");
 int max = Convert.ToInt32(Console.ReadLine());
 double [,] myRandomArray = RandomArray(m, n, d, min, max);
 ShowArray(myRandomArray);
-
-/*
-double [] RandomArray(int size, int digit, double minValue, double maxValue)
-{
-   double [] array = new double  [size];// Создание массива
-   double decim = Convert.ToDouble(digit);// Преобразуем в double   
-   Int32 dec = Convert.ToInt32(Math.Pow(10, decim));//Нужное ко-во знаков после запятой
-   minValue = Math.Round(minValue,size); // Округляем параметр
-   minValue *= dec; // Целое число для метода Random.Next
-   int minV = Convert.ToInt32(minValue); // Преобразуем в Int   
-   maxValue = Math.Round(maxValue,size); // Округляем параметр
-   maxValue *= dec; // Целое число для метода Random.Next
-   int maxV = Convert.ToInt32(maxValue);// Преобразуем в Int   
-   for(int i = 0; i < size; i++)      
-       
-       array[i] = Math.Round((new Random().NextDouble() * (new Random().Next(minV, maxV))) /  dec, digit); /* Округляем до заданного количества 
-       знаков после запятой в массиве случайную величину*/       
-   // return array;      
-/*
-Задача 38: Задайте массив вещественных чисел.
- Найдите разницу между максимальным и минимальным элементов массива.*/
-//minValue, maxValue+1
-/*
-double [] RandomArray(int size, int digit, double minValue, double maxValue)
-{
-   double [] array = new double  [size];// Создание массива
-   double decim = Convert.ToDouble(digit);// Преобразуем в double   
-   Int32 dec = Convert.ToInt32(Math.Pow(10, decim));//Нужное ко-во знаков после запятой
-   minValue = Math.Round(minValue,size); // Округляем параметр
-   minValue *= dec; // Целое число для метода Random.Next
-   int minV = Convert.ToInt32(minValue); // Преобразуем в Int   
-   maxValue = Math.Round(maxValue,size); // Округляем параметр
-   maxValue *= dec; // Целое число для метода Random.Next
-   int maxV = Convert.ToInt32(maxValue);// Преобразуем в Int   
-   for(int i = 0; i < size; i++)      
-       
-       array[i] = Math.Round((new Random().NextDouble() * (new Random().Next(minV, maxV))) /  dec, digit); // Округляем до заданного количества 
-       // знаков после запятой в массиве случайную величину      
-    return array;      
-}
-void ShowArray(double[] array)
-{       
-    Console.WriteLine("Your Array:");
-    for(int i = 0; i < array.Length; i++)
-        Console.Write(array[i] + "; ");
-    Console.WriteLine();   
-}
-void MaxMinDifferanceInArray(double[] array)
-{   
-    double maxCell = array[0];
-    double minCell = array[0];       
-    for(int i = 0; i < array.Length; i++)
-        if(array[i]  > maxCell)
-        maxCell = array[i];
-    for(int i = 0; i < array.Length; i++)
-        if(array[i]  < minCell)
-        minCell = array[i];    
-    Console.WriteLine($"The difference from minimum to maximum digits in your Array: {maxCell - minCell}");       
-}
-
-
 */
 /* Задача 50. Напишите программу, которая на вход принимает позиции элемента в двумерном массиве, и 
 возвращает значение этого элемента или же указание, что такого элемента нет.
@@ -117,9 +57,9 @@ void MaxMinDifferanceInArray(double[] array)
 5 9 2 3
 8 4 2 4
 1 7 -> числа с такими индексами в массиве нет
+*/
 
-    Метод для создания двумерного int массива и его вывода
-int[,] CreateRandom2dArray(int rows, int columns, int minValue, int maxValue)
+/*int[,] CreateRandom2dArray(int rows, int columns, int minValue, int maxValue) // Метод для создания двумерного int массива и его вывода
 {
     int[,] array = new int[rows, columns];
     for(int i = 0; i < rows; i++)        
@@ -127,7 +67,6 @@ int[,] CreateRandom2dArray(int rows, int columns, int minValue, int maxValue)
             array[i,j] = new Random().Next(minValue, maxValue + 1);
     return array;        
 }
-
 void Show2dArray(int[,] array)  //                                  Метод вывода массива 2D
 {
     for(int i = 0; i < array.GetLength(0); i++)
@@ -138,9 +77,18 @@ void Show2dArray(int[,] array)  //                                  Метод �
     }
     Console.WriteLine(); 
 }
+bool FindoutElement(int[,] array) // Метод лпределения присудствия элемента в массиве 
+{
+    int i = array.GetLength(0) - 1;
+    int j = array.GetLength(1) - 1;
+    if(i < array.GetLength(0) && j < array.GetLength(1))
+        return true;       
+    else
+        return false;
+}
 Console.WriteLine("Input number of rows:");
 int m = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Input number of colomns:");
+Console.WriteLine("Input number of columns:");
 int n = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Input a minimum of possible value:");
 int  min = Convert.ToInt32(Console.ReadLine());
@@ -148,8 +96,17 @@ Console.WriteLine("Input the maximum of possible value:");
 int max = Convert.ToInt32(Console.ReadLine());
 int[,] myRandomArray = CreateRandom2dArray(m, n, min, max);
 Show2dArray(myRandomArray);
-
-
+Console.WriteLine("Input number of your rows:");
+int rowE = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Input number of your columns:");
+int columnsE = Convert.ToInt32(Console.ReadLine());
+bool x = FindoutElement(myRandomArray);
+   if (x == true)
+       Console.Write($"The element in the array is:  {myRandomArray[rowE - 1, columnsE - 1]}");       
+    else
+        Console.WriteLine($"Index  was  outside the bounds of the array");  
+*/        
+/*
 Задача 52. Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
 Например, задан массив:  
 1 4 7 2
